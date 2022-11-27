@@ -30,7 +30,7 @@ body
     background-color: rgba(0, 140, 255, 0.7);
 }
 
-#presetCityBtn
+.btn-preset
 {
     color: black;
     background-color: lightgrey;
@@ -40,9 +40,10 @@ body
     justify-content: center;
     align-items: center;
     border: none;
+    width: 100%;
 }
 
-#presetCityBtn:hover
+.btn-preset:hover
 {
     background-color: rgba(211, 211, 211, 0.7);
 }
