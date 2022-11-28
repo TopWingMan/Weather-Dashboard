@@ -71,12 +71,12 @@ window.onload = function()
         }
     }
 
-    function SetForecast()
+    function SetForecasts()
     {
         SetDates();
         SetTemps();
         SetWinds();
         SetHumids();
     }
-    SetForecast();
+    SetForecasts();
 }

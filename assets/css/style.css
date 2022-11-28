@@ -92,4 +92,5 @@ body
     flex-direction: column;
     justify-content: space-evenly;
     padding-left: 6px;
+    border: solid black 2px;
 }
