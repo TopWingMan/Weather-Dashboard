@@ -38,7 +38,7 @@ window.onload = function()
     }
     FindACity();
 
-    //Set Information
+    //Set Forecast Information
     function SetDates()
     {
         for (i = 1; i < 6; i++)
@@ -79,4 +79,14 @@ window.onload = function()
         SetHumids();
     }
     SetForecasts();
+
+    //Set Today Box Information
+    function SetTodayBox()
+    {
+        document.getElementById("today-city-date").innerHTML = "Atlanta (9/13/2022) (var)";
+        document.getElementById("today-temp").innerHTML = "Temp: 76.62F (var)";
+        document.getElementById("today-wind").innerHTML = "Wind: 8.43 MPH (var)";
+        document.getElementById("today-humidity").innerHTML = "Humidity: 44% (var)";
+    }
+    SetTodayBox();
 }
