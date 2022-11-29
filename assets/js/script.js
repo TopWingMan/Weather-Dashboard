@@ -34,6 +34,12 @@ window.onload = function()
             .then((response) => response.json())
             .then((output) =>
             {
+                //Get date
+                var currentDay = (output.list[0].dt_txt.substring(8, 10)); //Get Day
+                var currentMonth = (output.list[0].dt_txt.substring(5, 7)); //Get Month
+                var currentYear = (output.list[0].dt_txt.substring(0, 4)); //Get Year
+                console.log("(" + currentMonth + "/" + currentDay + "/" + currentYear + ")");
+
                 //Get icon
                 console.log("Icon: " + output.list[0].weather[0].icon);
 
