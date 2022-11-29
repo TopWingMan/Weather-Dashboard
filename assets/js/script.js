@@ -3,6 +3,8 @@ window.onload = function()
     const buttonArray = ["atlanta", "denver", "seattle", "san francisco", "orlando", "new york", "chicago", "austin"];
     const apiKey = "820747b9100e2cc91a280dbc0b2581f6";
     var cityName = "";
+    var cityLat;
+    var cityLon;
 
     for (var i = 0; i < buttonArray.length; i++)
     {
@@ -17,33 +19,43 @@ window.onload = function()
 
     function FindACity(cityName)
     {
-        // fetch('http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=820747b9100e2cc91a280dbc0b2581f6')
-        // .then((response) => response.json())
-        // .then((data) => console.log(data));
-
-        //Find latitude
-        fetch('http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=820747b9100e2cc91a280dbc0b2581f6')
+        fetch('http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=5&appid=820747b9100e2cc91a280dbc0b2581f6')
         .then((response) => response.json())
-        .then((data) => console.log(data[0].lat));
+        .then((output) => 
+        {
+            //Find Latitude of city
+            cityLat = output[0].lat;
 
-        //Find longitude
-        fetch('http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=820747b9100e2cc91a280dbc0b2581f6')
-        .then((response) => response.json())
-        .then((data) => console.log(data[0].lon));
+            //Find Longitude of city
+            cityLon = output[0].lon;
 
-        //Find weather for place
-        fetch("https://api.openweathermap.org/data/2.5/forecast?lat=51.5073219&lon=-0.1276474&appid=820747b9100e2cc91a280dbc0b2581f6")
-        .then((response) => response.json())
-        .then((data) => console.log(data));
+            //Find weather for coordinates
+            fetch("https://api.openweathermap.org/data/2.5/forecast?lat=" + cityLat + "&lon=" + cityLon + "&appid=820747b9100e2cc91a280dbc0b2581f6")
+            .then((response) => response.json())
+            .then((output) =>
+            {
+                //Get icon
+                console.log("Icon: " + output.list[0].weather[0].icon);
+
+                //Get tempature
+                console.log("Temp: " + (((output.list[0].main.temp_max - 273.15) * 1.8) + 32) + "F");
+
+                //Get wind
+                console.log("Wind: " + output.list[0].wind.speed + " MPH");
+
+                //Get humidity
+                console.log("Humidity: " + output.list[0].main.humidity + "%");
+            })
+        })
     }
-    FindACity();
+    FindACity("troutdale");
 
     //Set Forecast Information
     function SetDates()
     {
         for (i = 1; i < 6; i++)
         {
-            document.getElementById('date' + i).innerHTML = "9/14/2022 (var)";
+            document.getElementById('date' + i).innerHTML = "9/14/2022 (var)"; //actually set using i
         }
     }
 
@@ -89,4 +101,10 @@ window.onload = function()
         document.getElementById("today-humidity").innerHTML = "Humidity: 44% (var)";
     }
     SetTodayBox();
+
+
+    function getWeather()
+    {
+        
+    }
 }
