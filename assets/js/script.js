@@ -24,7 +24,7 @@ window.onload = function()
 
     function SetWeatherToCity(cityName)
     {
-        fetch('http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=5&appid=820747b9100e2cc91a280dbc0b2581f6')
+        fetch('https://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=5&appid=820747b9100e2cc91a280dbc0b2581f6')
         .then((response) => response.json())
         .then((output) => 
         {
