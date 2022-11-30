@@ -1,8 +1,10 @@
 window.onload = function() 
 {
-    const buttonArray = ["atlanta", "denver", "seattle", "san francisco", "orlando", "new york", "chicago", "austin"];
-    const apiKey = "820747b9100e2cc91a280dbc0b2581f6";
+    const buttonArray = ["Atlanta", "Denver", "Seattle", "San Francisco", "Orlando", "New York", "Chicago", "Austin"];
+    //const apiKey = "820747b9100e2cc91a280dbc0b2581f6"; // Other Key
+    const apiKey = "3c01aab4380b77b777b136f67b72d7f9";
 
+    //Sets up pre city Search Buttons
     for (var i = 0; i < buttonArray.length; i++)
     {
         document.getElementById(buttonArray[i]).addEventListener('click', searchButtonValue.bind(this, buttonArray[i]));
@@ -10,8 +12,14 @@ window.onload = function()
     
     function searchButtonValue(buttonName)
     {
-        console.log(buttonName);
-        //document.getElementById(searchInput).innerHTML = "CHeese";
+        SetWeatherToCity(buttonName);
+    }
+
+    document.getElementById("searchButton").addEventListener('click', SearchCityName.bind(this));
+
+    function SearchCityName()
+    {
+        SetWeatherToCity(document.getElementById("searchInput").value);
     }
 
     function SetWeatherToCity(cityName)
@@ -26,15 +34,17 @@ window.onload = function()
             //Find Longitude of city
             var cityLon = output[0].lon;
 
-            FindWeather(cityName, cityLat, cityLon, 0); //Find and set todays weather to citynames weather
-            FindWeather(cityName, cityLat, cityLon, 1); //Find and set forecast1 weather to citynames forecast1 weather
+            //Find and set todays weather to citynames weather
+            FindWeather(cityName, cityLat, cityLon, 0);
+
+            //Find and set forecasts weather to citynames forecasts weather
+            FindWeather(cityName, cityLat, cityLon, 1);
             FindWeather(cityName, cityLat, cityLon, 9);
             FindWeather(cityName, cityLat, cityLon, 17);
             FindWeather(cityName, cityLat, cityLon, 25);
             FindWeather(cityName, cityLat, cityLon, 33);
         })
     }
-    SetWeatherToCity("Troutdale");
 
     function FindWeather(cityName ,cityLat, cityLon, value)
     {
@@ -65,17 +75,16 @@ window.onload = function()
         })
     }
 
-    //Set Today Box Information
     function SetForecast(cityName, date, icon, temp, wind, humidity, value)
     {
-        if (value === 0) //Update today Box
+        if (value === 0) //Set Today Box Information
         {
             document.getElementById("today-city-date").innerHTML = cityName + " " + date;
             document.getElementById("today-temp").innerHTML = temp;
             document.getElementById("today-wind").innerHTML = wind;
             document.getElementById("today-humidity").innerHTML = humidity;
         }
-        else if (value > 0)
+        else if (value > 0) //Set Forcast Boxes Information
         {
             document.getElementById('date' + value).innerHTML = date;
             document.getElementById('temp' + value).innerHTML = temp;
@@ -83,4 +92,6 @@ window.onload = function()
             document.getElementById('humid' + value).innerHTML = humidity;
         }
     }
+
+    //SetWeatherToCity("Atlanta");
 }
